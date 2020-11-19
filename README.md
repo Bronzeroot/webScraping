@@ -1,2 +1,2 @@
-# webScraping&Crwaling
-build web scraper&crwaler with python
+# webScraping&Crawling
+build web scraper&crawler with python
