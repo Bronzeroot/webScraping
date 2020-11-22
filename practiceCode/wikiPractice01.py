@@ -16,3 +16,5 @@ while len(links)>0 :
     newArticle = links[random.randint(0,len(links)-1)].attrs['href']
     print(newArticle)
     links = getLinks(newArticle)
+
+# 위키의 링크로 웹사이트를 무작위 이동합니다
