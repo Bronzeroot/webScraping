@@ -17,4 +17,4 @@ while len(links)>0 :
     print(newArticle)
     links = getLinks(newArticle)
 
-# 위키의 링크로 웹사이트를 무작위 이동합니다
+#위키의 링크로 웹사이트를 무작위 이동합니다
