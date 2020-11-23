@@ -54,3 +54,28 @@ def followExternalOnly(startingSite):
     followExternalOnly(externalLink)
 
 followExternalOnly('http://oreilly.com')
+
+
+# 사이트에서 찾은 외부 URL을 모두 리스트로 수집합니다.
+allExtLinks = set()
+allIntLinks = set()
+
+def getAllExternalLnks(siteUrl):
+    html = urlopen(siteUrl)
+    domain = '{}://{}'.format(urlparse(siteUrl).scheme,
+        urlparse(siteUrl).netloc)
+    bs = BeautifulSoup(html, 'html.parser')
+    internalLinks = getInternalLinks(bs,domain)
+    externalLinks = getExternalLinks(bs,domain)
+
+    for link in externalLinks:
+        if link not in allExtLinks:
+            allExtLinks.add(link)
+            print(link)
+    for link in internalLinks:
+        if link not in allIntLinks:
+            allIntLinks.add(link)
+            getAllExternalLinks(link)
+
+allIntLinks.add('http://oreilly.com')
+getAllExternalLinks('http://oreilly.com')
