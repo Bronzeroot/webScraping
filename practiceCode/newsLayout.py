@@ -24,20 +24,18 @@ def scrapeBrookings(url):
     body = bs.find('div',{'class','post-body'}).text
     return Content(url, title, body)
 
-url = 
-'''
-    http://www.brookings.edu/blog/future-development/2018/01/26
-    delivering-inclusive-urban-access-3-uncomfortable-truths/
+url = '''
+http://www.brookings.edu/blog/future-development/2018/01/26
+delivering-inclusive-urban-access-3-uncomfortable-truths/
 '''
 content = scrapeBrookings(url)
 print('Title:{}'.format(content.title))
 print('URL:{}\n'.format(content.url))
 print(content.body)
 
-url = 
-'''
-    https://www.nytimes.com/2018/01/25/
-    opinion/sunday/silicon-vally-immortality.html
+url = '''
+https://www.nytimes.com/2018/01/25/
+opinion/sunday/silicon-vally-immortality.html
 '''
 content=scrapeNYTimes(url)
 print('Title:{}'.format(content.title))
