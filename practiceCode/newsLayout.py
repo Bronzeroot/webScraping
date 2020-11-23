@@ -26,8 +26,8 @@ def scrapeBrookings(url):
 
 url = 
 '''
-http://www.brookings.edu/blog/future-development/2018/01/26
-delivering-inclusive-urban-access-3-uncomfortable-truths/
+    http://www.brookings.edu/blog/future-development/2018/01/26
+    delivering-inclusive-urban-access-3-uncomfortable-truths/
 '''
 content = scrapeBrookings(url)
 print('Title:{}'.format(content.title))
@@ -36,8 +36,8 @@ print(content.body)
 
 url = 
 '''
-https://www.nytimes.com/2018/01/25/
-opinion/sunday/silicon-vally-immortality.html
+    https://www.nytimes.com/2018/01/25/
+    opinion/sunday/silicon-vally-immortality.html
 '''
 content=scrapeNYTimes(url)
 print('Title:{}'.format(content.title))
