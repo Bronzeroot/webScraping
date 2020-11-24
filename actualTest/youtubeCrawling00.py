@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 import re
-
+# https://github.com/SOMJANG/Youtube_Comment_Crawler을 메인으로, 기타 커뮤니티를 참고하였습니다.
 driver = wd.Chrome("C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe")
 url = 'http://www.youtube.com/watch?v=I0RVlki14gI'
 driver.get(url)
