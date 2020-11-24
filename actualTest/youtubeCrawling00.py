@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 import re
-# https://github.com/SOMJANG/Youtube_Comment_Crawler의 내용을 메인으로 기타 Python 커뮤니티의 도움을 받았습니다.
 
 driver = wd.Chrome("C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe")
 url = 'http://www.youtube.com/watch?v=I0RVlki14gI'
@@ -13,7 +12,7 @@ last_page_height = driver.execute_script('return document.documentElement.scroll
 
 while True:
     driver.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
-    time.sleep(5.0)
+    time.sleep(3.0)
     new_page_height = driver.execute_script('return document.documentElement.scrollHeight')
 
     if new_page_height == last_page_height:
@@ -33,22 +32,20 @@ youtube_comments = soup.select('yt-formatted-string#content-text')
 str_youtube_userIDs = []
 str_youtube_comments = []
 
-for i in range(len(youtube_user_IDS)):
+for i in range(len(youtube_user_IDs)):
     str_tmp = str(youtube_user_IDs[i].text)
 #    print(str_tmp)
     str_tmp = str_tmp.replace('\n','')
     str_tmp = str_tmp.replace('\t','')
     str_tmp = str_tmp.replace('           ', '')
-    str_youtube_userIds.append(str_tmp)
+    str_youtube_userIDs.append(str_tmp)
 
-    str_tmp = str(youtube_commetns[i].text)
+    str_tmp = str(youtube_comments[i].text)
     str_tmp = str_tmp.replace('\n','')
     str_tmp = str_tmp.replace('\t','')
     str_tmp = str_tmp.replace('           ', '')
     str_youtube_comments.append(str_tmp)
 
-for i in range(len(str_youtube_userIDs)):
-    print(str_youtube_userIDs[i], str_youtube_comments[i])
 
 pd_data = {'ID':str_youtube_userIDs, 'Comment':str_youtube_comments}
 
