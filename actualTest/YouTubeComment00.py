@@ -21,7 +21,6 @@ while True:
     if new_page_height == last_page_height:
         break
     last_page_height = new_page_height
-
     
 #Parsing    
 html_source = driver.page_source
@@ -31,8 +30,17 @@ soup = BeautifulSoup(html_source, 'lxml')
 #Scrapping
 cmt_text = soup.select("yt-formatted-string#content-text")
 cmt_likes = soup.select("span#vote-count-middle")
-#cmt_comments = soup.select()
 
+vd_title = soup.select("h1.title.style-scope.ytd-video-primary-info-renderer")[0].text
+vd_tmp_views = soup.select("span.view-count")[0].text
+vd_views = int(re.sub(r'[^0-9]', '', vd_tmp_views))
+vd_tmp_comments = soup.select("yt-formatted-string.count-text")[0].text
+vd_comments = int(re.sub(r'[^0-9]', '', vd_tmp_comments))
+vd_likes = int(soup.select("yt-formatted-string#text.style-scope.ytd-toggle-button-renderer.style-text", id='text')[0].text)
+vd_channel = soup.select("yt-formatted-string#text.style-scope.ytd-channel-name")[0].text
+vd_subscribers = soup.select("yt-formatted-string#owner-sub-count.style-scope.ytd-video-owner-renderer")[0].text
+
+#cmt_comments = soup.select()
 
 str_cmt_text = []
 int_cmt_likes = []
@@ -61,7 +69,9 @@ for i in range(len(cmt_likes)):
 #    str_cmt_reply.append(str_tmp)
 
 #Pandas to CSV
-pd_data = {'Comment': str_cmt_text, 'Likes' : int_cmt_likes}
+cmt_data = {'Comment': str_cmt_text, 'Likes' : int_cmt_likes}
+video_data = {'Url': url, 'Title': vd_title, 'Views': vd_views, 'Comments':vd_comments, 'Likes' : vd_likes, 'Channel': vd_channel ,'Subscribers': vd_subscribers}
+pd_data = {'Url': url, 'VD_Title': vd_title, 'VD_Views': vd_views, 'VD_Comments':vd_comments, 'VD_Likes' : vd_likes, 'VD_Channel': vd_channel ,'VD_Subscribers': vd_subscribers,'Cmt_text': str_cmt_text, 'Cmt_Likes' : int_cmt_likes}
 #pd_data = {'Comment': str_cmt_text, 'Likes' : int_cmt_likes, 'Reply' : str_cmt_reply }
 youtube_pd = pd.DataFrame(pd_data) 
-#youtube_pd.to_csv(r'', index = False, header = True)
+#youtube_pd.to_csv('YouTubeCmt.csv',encoding = 'utf-8-sig', index = False, header = True)
